@@ -4,7 +4,10 @@
 
 # Home page
 GET     /                           controllers.PersonController.index
-POST    /person                     controllers.PersonController.addPerson
+GET     /person/create              controllers.PersonController.viewAddPerson
+POST    /person/create              controllers.PersonController.addPerson
+GET     /person/update              controllers.PersonController.viewPerson(id: Long)
+POST    /person/update              controllers.PersonController.updatePerson(id: Long)
 GET     /persons                    controllers.PersonController.getPersons
 
 # Map static resources from the /public folder to the /assets URL path

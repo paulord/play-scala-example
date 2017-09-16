@@ -1,18 +1,20 @@
-@(person: Form[CreatePersonForm])(implicit request: RequestHeader, messages: Messages)
+@(list:Seq[Person])
 
 @import helper._
 
-@main("Welcome to Play") {
-	<script type='text/javascript' src='@routes.Assets.versioned("javascripts/index.js")'></script>
+@main("People") {
 
-	<ul id="persons"></ul>
+	<h1>Persons</h1>
+    <ul>
+    @for(p <- list) {
+        <li>
+            <a href="@routes.PersonController.viewPerson(p.id)">@p.name</a>
+        </li>
+    }
+		</ul>
 
-  @form(CSRF(routes.PersonController.addPerson())) {
-		@inputText(person("name"))
-		@inputText(person("age"))
+	<form action="@routes.PersonController.addPerson()" method="get">
+		 <button class="navlink">Add Person</button>
+	</form>
 
-		<div class="buttons">
-			<input type="submit" value="Add Person"/>
-		</div>
-	}
 }

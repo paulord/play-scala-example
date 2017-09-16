@@ -1,0 +1,20 @@
+@(person: Form[PersonForm], id: Long)(implicit request: RequestHeader, messages: Messages)
+
+@import helper._
+
+@main("Update Person") {
+
+  @form(CSRF(routes.PersonController.updatePerson(id))) {
+		@inputText(person("name"))
+		@inputText(person("age"))
+		@inputRadioGroup(
+		    person("sex"),
+		    options = Seq("M"->"Male","F"->"Female"),
+		    '_label -> "Sex",
+		    '_error -> person("sex").error.map(_.withMessage("select sex")))
+
+		<div class="buttons">
+			<input type="submit" value="Update Person"/>
+		</div>
+	}
+}
